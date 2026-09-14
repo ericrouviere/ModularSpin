@@ -23,7 +23,13 @@ construction. The pipeline:
   Conda-based Python on first build, so no manual setup is usually needed
 
 Both repositories are currently private, so installing them requires a GitHub account with
-access and git credentials that can clone over HTTPS (e.g. via `gh auth login`).
+access. Julia's built-in git library cannot use your stored GitHub credentials and stops at a
+username prompt, so tell Pkg to use the system `git` instead, which picks up credentials from
+`gh auth login` or the macOS keychain:
+
+```bash
+export JULIA_PKG_USE_CLI_GIT=true   # add to ~/.zshrc to make it permanent
+```
 
 ## Installation
 
@@ -32,7 +38,8 @@ otherwise Pkg cannot resolve ModularSpin's dependency on it.
 
 ### Use it in a project
 
-From the Julia REPL, in the environment you want to use (ideally a project environment for
+With `JULIA_PKG_USE_CLI_GIT=true` set in the shell that launches Julia (see Requirements),
+start the Julia REPL in the environment you want to use (ideally a project environment for
 your analysis rather than the global one):
 
 ```julia
@@ -60,7 +67,7 @@ pinned commit:
 ```bash
 git clone https://github.com/ericrouviere/ModularSpin.git
 cd ModularSpin
-julia --project=. -e 'using Pkg; Pkg.add(url="https://github.com/ericrouviere/SpinModel"); Pkg.instantiate()'
+JULIA_PKG_USE_CLI_GIT=true julia --project=. -e 'using Pkg; Pkg.add(url="https://github.com/ericrouviere/SpinModel"); Pkg.instantiate()'
 ```
 
 If you also have a local clone of SpinModel, use `Pkg.develop(path="path/to/SpinModel")` in
