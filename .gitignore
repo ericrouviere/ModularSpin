@@ -1,0 +1,13 @@
+# Local-only files
+CLAUDE.md
+.claude/
+
+# Manifest pins SpinModel to a local path; each user resolves their own
+Manifest.toml
+
+# Outputs and editor/OS clutter
+*.jl.cov
+*.jl.*.cov
+*.jl.mem
+.DS_Store
+.ipynb_checkpoints/
