@@ -22,7 +22,7 @@ construction. The pipeline:
 - `PyPlot` uses Python's matplotlib through PyCall; by default PyCall installs its own
   Conda-based Python on first build, so no manual setup is usually needed
 
-Both repositories are currently private, so installing them requires a GitHub account with
+SpinModel is currently a private repository, so installing it requires a GitHub account with
 access. Julia's built-in git library cannot use your stored GitHub credentials and stops at a
 username prompt, so tell Pkg to use the system `git` instead, which picks up credentials from
 `gh auth login` or the macOS keychain:
